@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "533319386495",
+    "firebase_url": "https://comp4521-df3c9.firebaseio.com",
+    "project_id": "comp4521-df3c9",
+    "storage_bucket": "comp4521-df3c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533319386495:android:ae75701386506ae34dc64a",
+        "android_client_info": {
+          "package_name": "com.unilife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533319386495-f92uetd3s8focri0skm7orkadiq8l2rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnLkORmuC4JhOzRU3wU2s1ioxt5rjrnWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533319386495-f92uetd3s8focri0skm7orkadiq8l2rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

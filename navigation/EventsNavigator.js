@@ -18,7 +18,7 @@ import CategoryInfoScreen from '../screens/CategoryInfoScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import FiltersScreen from '../screens/FiltersScreen';
 import AcademicsScreen from '../screens/AcademicsScreen';
-import BookingScreen from '../screens/BookingScreen';
+import FeedbackScreen from '../screens/FeedbackScreen';
 import EventScreen from '../screens/EventScreen';
 import EventDetailScreen from '../screens/EventDetailScreen';
 import InfoScreen from '../screens/InfoScreen';
@@ -103,10 +103,10 @@ const InformationNavigator = createStackNavigator(
   {defaultNavigationOptions: defaultStackNavOptions},
 );
 
-const BookingNavigator = createStackNavigator(
+const FeedbackNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Booking: BookingScreen,
+    Feedback: FeedbackScreen,
   },
   {defaultNavigationOptions: defaultStackNavOptions},
 );
@@ -151,7 +151,7 @@ const HomeNavigator = createStackNavigator(
     AcademicsNav: AcademicsNavigator,
     TodoNav: TodoNavigator,
     InfoNav: InformationNavigator,
-    BookingNav: BookingNavigator,
+    FeedbackNav: FeedbackNavigator,
     MapNav: MapNavigator,
     CalNav: CalendarNavigator,
   },

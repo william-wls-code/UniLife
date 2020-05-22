@@ -8,7 +8,7 @@ import news from '../assets/icons/news.png';
 import academics from '../assets/icons/academics.png';
 import todo from '../assets/icons/todo.png';
 import info from '../assets/icons/info.png';
-import booking from '../assets/icons/booking.png';
+import feedback from '../assets/icons/feedback.png';
 
 /*export const CATEGORIES = [
   new Category('c1', 'Events', '#f5428d'),
@@ -16,7 +16,7 @@ import booking from '../assets/icons/booking.png';
   new Category('c3', 'Academics', '#f5a442'),
   new Category('c4', 'To-do', '#368dff'),
   new Category('c5', 'Info', '#41d95d'),
-  new Category('c6', 'Booking', '#9eecff'),
+  new Category('c6', 'Feedback', '#9eecff'),
 ];
 */
 export const MENU = [
@@ -25,7 +25,7 @@ export const MENU = [
   new Menu('c3', 'Academics', academics, 'AcademicsScreen'),
   new Menu('c4', 'To-do', todo, 'TodoScreen'),
   new Menu('c5', 'Info', info, 'InfoScreen'),
-  new Menu('c6', 'Booking', booking, 'BookingScreen'),
+  new Menu('c6', 'Feedback', feedback, 'FeedbackScreen'),
 ];
 
 export const EVENTS = [

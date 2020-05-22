@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {TextInput} from 'react-native-paper';
 import {ScrollView, View, Image, Text, Button, StyleSheet} from 'react-native';
-import { WebView } from 'react-native-webview';
+import {WebView} from 'react-native-webview';
 const InfoScreen = (props) => {
   return (
-    <View><Text>infof</Text></View>
+    <View>
+      <Text>infof</Text>
+    </View>
   );
 };
 

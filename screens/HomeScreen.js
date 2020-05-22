@@ -85,7 +85,7 @@ const HomeScreen = (props) => {
         </TouchableCmp>
       </View>
       <View style={styles.gridItem}>
-        <TouchableCmp onPress={() => props.navigation.navigate('Booking')}>
+        <TouchableCmp onPress={() => props.navigation.navigate('Feedback')}>
           <View style={{...styles.container}}>
             <Image style={styles.image} source={feedback} />
             <Text style={styles.title} numberOfLines={2}>
@@ -109,7 +109,7 @@ const HomeScreen = (props) => {
           <View style={{...styles.container}}>
             <Image style={styles.image} source={calendar} />
             <Text style={styles.title} numberOfLines={2}>
-            Calendar
+              Calendar
             </Text>
           </View>
         </TouchableCmp>
