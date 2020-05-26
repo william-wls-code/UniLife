@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 import React, {Component} from 'react';
 import {
   AppRegistry,
@@ -14,28 +14,16 @@ import {
 
 import { Header,Container,Title, Content, List, ListItem, InputGroup, Input, Icon, Picker, Button } from 'native-base';
 
-import Login from './LoginScreen';
-//import styles from '../styles/mainstyle.js';
 import DefaultText from '../components/DefaultText';
 import Colors from '../constants/Colors';
+import LoginScreen from './LoginScreen';
 const {width, height} = Dimensions.get('screen');
 
-// Styles specific to the account page
-const accountStyles = StyleSheet.create({
-  email_container: {
-    padding: 20
-  },
-  email_text: {
-    fontSize: 18
-  }
-});
-
 class AccountScreen extends Component {
-
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      user:null,
+      user: null,
       loading: true,
     }
   }
@@ -50,51 +38,41 @@ class AccountScreen extends Component {
         loading: false
       });
     });
-
   }
 
   render() {
-    // If we are loading then we display the indicator, if the account is null and we are not loading
-    // Then we display nothing. If the account is not null then we display the account info.
-    const content = this.state.loading ?
-    <ActivityIndicator size="large"/> :
-       this.state.user &&
-        <Content>
-            <View style={accountStyles.email_container}>
-                <Text style={accountStyles.email_text}>{this.state.user.email}</Text>
-            </View>
-            <Image
-                style={styles.image}
-                source={{uri: this.state.user.photoURL}} />
-            <Button onPress={this.logout.bind(this)} style={styles.button}>
-                Logout
-            </Button>
-        </Content>
-      ;
-      // console.log("loading user",this.state.user,this.state.loading);
     return (
-    <Container>
-        <Header>
-            <Title>Header</Title>
-        </Header>
-        {content}
-    </Container>
+        <View style={styles.screen}>
+            <View style={styles.headerSection}>
+                <Text style={styles.title}>{this.state.user.email}</Text>
+            </View>
+            <View style={styles.mainSection}>
+                <Button
+                mode="contained"
+                style={styles.button}
+                color={Colors.highlightColor}
+                labelStyle={styles.buttonContent}
+                onPress={this.logout.bind(this)}>
+                Logout
+                </Button>
+            </View>
+        </View>
     );
-  }
+}
 
   logout() {
     // logout, once that is complete, return the user to the login screen.
     AsyncStorage.removeItem('userData').then(() => {
         this.props.firebaseApp.auth().signOut().then(() => {
             this.props.navigator.push({
-                component: Login
+                component: LoginScreen
             });
         });  
     });
   }
 }
 
-AppRegistry.registerComponent('Account', () => Account);
+AppRegistry.registerComponent('Account', () => AccountScreen);
 
 AccountScreen.navigationOptions = (navData) => {
     return {
@@ -103,68 +81,50 @@ AccountScreen.navigationOptions = (navData) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'stretch',
-        flex: 1
-    },
-    body: {
-      flex: 9,
-      flexDirection:'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: Colors.surfaceColor,
-    },
-    headerSection: {
-      width: '100%',
-      height: 150,
-      padding: 20,
-      paddingLeft: 35,
-      textAlign: 'left',
-      color: 'white',
-      backgroundColor: Colors.secondaryColor,
-      justifyContent: 'center',
-    },
-    formSection: {
-      flex: 1,
-      alignItems: 'center',
-      backgroundColor: Colors.surfaceColor,
-      marginTop: 30,
-    },
-    title: {
-      fontFamily: 'Montserrat-Bold',
-      fontSize: 18,
-      textAlign: 'left',
-      color: 'white',
-      paddingBottom: 7.5,
-    },
-    headerText: {
-      fontFamily: 'Montserrat-Regular',
-      color: 'white',
-      fontSize: 16,
-    },
-    formInput: {
-      width: width * 0.85,
-      paddingTop: 7.5,
-      paddingBottom: 7.5,
-      backgroundColor: Colors.surfaceColor,
-      fontFamily: 'Montserrat-Regular',
-      fontSize: 16,
-    },
-    Button: {
-      marginTop: 30,
-      marginBottom: 20,
-      width: width / 3,
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
-      backgroundColor: Colors.highlightColor,
-    },
-    buttonContent: {
-      fontFamily: 'Montserrat-SemiBold',
-      fontSize: 16,
-      letterSpacing: 0,
-      color: 'white',
-    },
-  });
+    screen: {
+        flex: 1,
+        /* justifyContent: 'center',*/
+        alignItems: 'center',
+        backgroundColor: Colors.surfaceColor,
+      },
+      headerSection: {
+        width: '100%',
+        height: 150,
+        padding: 20,
+        paddingLeft: 35,
+        textAlign: 'left',
+        color: 'white',
+        backgroundColor: Colors.secondaryColor,
+        justifyContent: 'center',
+      },
+      mainSection: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: Colors.surfaceColor,
+        marginTop: 30,
+      },
+      title: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 18,
+        textAlign: 'left',
+        color: 'white',
+        paddingBottom: 7.5,
+      },
+      button: {
+        marginTop: 30,
+        marginBottom: 20,
+        width: width / 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        backgroundColor: Colors.highlightColor,
+      },
+      buttonContent: {
+        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 16,
+        letterSpacing: 0,
+        color: 'white',
+      },
+});
 
 export default AccountScreen;

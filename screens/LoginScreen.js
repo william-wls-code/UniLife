@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 import React, {Component} from 'react';
 import {
   AppRegistry,
@@ -10,17 +10,16 @@ import {
 
 import { Header,Container,Title, Content, List, ListItem, InputGroup, Input, Icon, Text, Picker, Button } from 'native-base';
 
-import Signup from './SignupScreen';
-//import Account from './Main'
-//import styles from '../styles/mainstyle.js';
+import SignupScreen from './SignupScreen';
+import AccountScreen from './AccountScreen'
 
 import DefaultText from '../components/DefaultText';
 import Colors from '../constants/Colors';
 const {width, height} = Dimensions.get('screen');
 
 class LoginScreen extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     // We have the same props as in our signup.js file and they serve the same purposes.
     this.state = {
       loading: false,
@@ -30,51 +29,57 @@ class LoginScreen extends React.Component {
   }
 
   render() {
-    // The content of the screen should be inputs for a username, password and submit button.
-    // If we are loading then we display an ActivityIndicator.
-    const content = this.state.loading ?
-    <View style={styles.body}>
-    <ActivityIndicator size="large"/>
-    </View> :
-    <Content>
-        <List>
-            <ListItem>
-                <InputGroup>
-                <Icon name="ios-person" style={{ color: '#0A69FE' }} />
-                <Input
-                onChangeText={(text) => this.setState({email: text})}
+    return (
+        <View style={styles.screen}>
+            <View style={styles.headerSection}>
+                <Text style={styles.title}>Welcome!</Text>
+                <Text style={styles.headerText}>Login here using your email and password</Text>
+            </View>
+            <View style={styles.formSection}>
+                <TextInput
+                label="Email"
+                returnKeyType="next"
                 value={this.state.email}
-                placeholder={"Email Address"} />
-                </InputGroup>
-        </ListItem>
-        <ListItem>
-            <InputGroup>
-                <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
-            <Input
-                onChangeText={(text) => this.setState({password: text})}
+                onChangeText={(text) => this.updateInput('email', text)}
+                autoCapitalize="none"
+                autoCompleteType="email"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                style={styles.formInput}
+                underlineColor={Colors.secondaryColor}
+                theme={{colors: {primary: Colors.highlightColor}}}
+                />
+                <TextInput
+                label="Password"
                 value={this.state.password}
                 secureTextEntry={true}
-                placeholder={"Password"} />
-            </InputGroup>
-        </ListItem>
-        </List>
-        <Button style={styles.button} onPress={this.login.bind(this)}>
-        Login
-        </Button>
-        <Button onPress={this.goToSignup.bind(this)} style={styles.button}>
-        New Here?
-        </Button>
-    </Content>
-        ;
-
-    // A simple UI with a toolbar, and content below it.
-    return (
-        <Container>
-            <Header>
-                <Title>Login</Title>
-            </Header>
-        {content}
-    </Container>
+                onChangeText={(text) => this.updateInput('password', text)}
+                autoCapitalize="none"
+                autoCompleteType="off"
+                textContentType="password"
+                keyboardType="default"
+                style={styles.formInput}
+                underlineColor={Colors.secondaryColor}
+                theme={{colors: {primary: Colors.highlightColor}}}
+                />
+                <Button
+                mode="contained"
+                style={styles.button}
+                color={Colors.highlightColor}
+                labelStyle={styles.buttonContent}
+                onPress={this.login.bind(this)}>
+                Login
+                </Button>
+                <Button
+                mode="contained"
+                style={styles.button}
+                color={Colors.highlightColor}
+                labelStyle={styles.buttonContent}
+                onPress={this.goToSignup.bind(this)}>
+                New Here?
+                </Button>
+            </View>
+        </View>
     );
   }
 
@@ -91,7 +96,7 @@ class LoginScreen extends React.Component {
               });
               AsyncStorage.setItem('userData', JSON.stringify(userData));
               this.props.navigator.push({
-                component: Account
+                component: AccountScreen
               });
       }
     ).catch((error) =>
@@ -106,12 +111,12 @@ class LoginScreen extends React.Component {
   // Go to the signup page
   goToSignup(){
     this.props.navigator.push({
-      component: Signup
+      component: SignupScreen
     });
   }
 }
 
-AppRegistry.registerComponent('Login', () => Login);
+AppRegistry.registerComponent('Login', () => LoginScreen);
 
 LoginScreen.navigationOptions = (navData) => {
     return {
@@ -120,68 +125,63 @@ LoginScreen.navigationOptions = (navData) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'stretch',
-        flex: 1
-    },
-    body: {
-      flex: 9,
-      flexDirection:'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: Colors.surfaceColor,
-    },
-    headerSection: {
-      width: '100%',
-      height: 150,
-      padding: 20,
-      paddingLeft: 35,
-      textAlign: 'left',
-      color: 'white',
-      backgroundColor: Colors.secondaryColor,
-      justifyContent: 'center',
-    },
-    formSection: {
-      flex: 1,
-      alignItems: 'center',
-      backgroundColor: Colors.surfaceColor,
-      marginTop: 30,
-    },
-    title: {
-      fontFamily: 'Montserrat-Bold',
-      fontSize: 18,
-      textAlign: 'left',
-      color: 'white',
-      paddingBottom: 7.5,
-    },
-    headerText: {
-      fontFamily: 'Montserrat-Regular',
-      color: 'white',
-      fontSize: 16,
-    },
-    formInput: {
-      width: width * 0.85,
-      paddingTop: 7.5,
-      paddingBottom: 7.5,
-      backgroundColor: Colors.surfaceColor,
-      fontFamily: 'Montserrat-Regular',
-      fontSize: 16,
-    },
-    Button: {
-      marginTop: 30,
-      marginBottom: 20,
-      width: width / 3,
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
-      backgroundColor: Colors.highlightColor,
-    },
-    buttonContent: {
-      fontFamily: 'Montserrat-SemiBold',
-      fontSize: 16,
-      letterSpacing: 0,
-      color: 'white',
-    },
-  });
+    screen: {
+        flex: 1,
+        /* justifyContent: 'center',*/
+        alignItems: 'center',
+        backgroundColor: Colors.surfaceColor,
+      },
+      headerSection: {
+        width: '100%',
+        height: 150,
+        padding: 20,
+        paddingLeft: 35,
+        textAlign: 'left',
+        color: 'white',
+        backgroundColor: Colors.secondaryColor,
+        justifyContent: 'center',
+      },
+      formSection: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: Colors.surfaceColor,
+        marginTop: 30,
+      },
+      title: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 18,
+        textAlign: 'left',
+        color: 'white',
+        paddingBottom: 7.5,
+      },
+      headerText: {
+        fontFamily: 'Montserrat-Regular',
+        color: 'white',
+        fontSize: 16,
+      },
+      formInput: {
+        width: width * 0.85,
+        paddingTop: 7.5,
+        paddingBottom: 7.5,
+        backgroundColor: Colors.surfaceColor,
+        fontFamily: 'Montserrat-Regular',
+        fontSize: 16,
+      },
+      button: {
+        marginTop: 30,
+        marginBottom: 20,
+        width: width / 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        backgroundColor: Colors.highlightColor,
+      },
+      buttonContent: {
+        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 16,
+        letterSpacing: 0,
+        color: 'white',
+      },
+    });
 
 export default LoginScreen;

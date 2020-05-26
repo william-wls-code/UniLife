@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 import React, {Component} from 'react';
 import {
   AppRegistry,
@@ -9,18 +9,16 @@ import {
 import { Header,Title,Container, Content, List, ListItem, InputGroup, Input, Icon, Text, Picker, Button } from 'native-base';
 
 import Login from './LoginScreen';
-//import styles from '../styles/mainstyle.js';
 import DefaultText from '../components/DefaultText';
 import Colors from '../constants/Colors';
+import LoginScreen from './LoginScreen';
 const {width, height} = Dimensions.get('screen');
 
 class SignupScreen extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      // used to display a progress indicator if waiting for a network response.
       loading: false,
-      // entered credentials
       email: '',
       password: ''
     }
@@ -47,7 +45,7 @@ class SignupScreen extends React.Component {
           loading: false
         });
         this.props.navigator.push({
-          component: Login
+          component: LoginScreen
         });
     }).catch((error) => {
       // Leave the fields filled when an error occurs and hide the progress indicator.
@@ -59,57 +57,67 @@ class SignupScreen extends React.Component {
   }
 
   render() {
-    // The content of the screen should be inputs for a username, password and submit button.
-    // If we are loading then we display an ActivityIndicator.
-    const content = this.state.loading ? <ActivityIndicator size="large"/> :
-        <Content>
-            <List>
-                <ListItem>
-                    <InputGroup>
-                    <Icon name="ios-person" style={{ color: '#0A69FE' }} />
-                    <Input
-                    onChangeText={(text) => this.setState({email: text})}
-                    value={this.state.email}
-                    placeholder={"Email Address"} />
-                    </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup>
-                    <Icon name="ios-unlock" style={{ color: '#0A69FE' }} />
-                <Input
-                    onChangeText={(text) => this.setState({password: text})}
-                    value={this.state.password}
-                    secureTextEntry={true}
-                    placeholder={"Password"} />
-                </InputGroup>
-            </ListItem>
-            </List>
-            <Button style={styles.button} onPress={this.signup.bind(this)}>
-            Signup
-            </Button>
-            <Button onPress={this.goToLogin.bind(this)} style={styles.button}>
-            Go to Login
-            </Button>
-        </Content>
-    ;
-    // A simple UI with a toolbar, and content below it.
     return (
-        <Container>
-            <Header>
-                <Title>Sign Up</Title>
-            </Header>
-            {content}
-        </Container>
+        <View style={styles.screen}>
+            <View style={styles.headerSection}>
+                <Text style={styles.title}>Sign Up</Text>
+                <Text style={styles.headerText}>to continue to UniLife</Text>
+            </View>
+            <View style={styles.mainSection}>
+                <TextInput
+                label="Email"
+                returnKeyType="next"
+                value={this.state.email}
+                onChangeText={(text) => this.updateInput('email', text)}
+                autoCapitalize="none"
+                autoCompleteType="email"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                style={styles.formInput}
+                underlineColor={Colors.secondaryColor}
+                theme={{colors: {primary: Colors.highlightColor}}}
+                />
+                <TextInput
+                label="Password"
+                value={this.state.password}
+                secureTextEntry={true}
+                onChangeText={(text) => this.updateInput('password', text)}
+                autoCapitalize="none"
+                autoCompleteType="off"
+                textContentType="password"
+                keyboardType="default"
+                style={styles.formInput}
+                underlineColor={Colors.secondaryColor}
+                theme={{colors: {primary: Colors.highlightColor}}}
+                />
+                <Button
+                mode="contained"
+                style={styles.button}
+                color={Colors.highlightColor}
+                labelStyle={styles.buttonContent}
+                onPress={this.signup.bind(this)}>
+                Signup
+                </Button>
+                <Button
+                mode="contained"
+                style={styles.button}
+                color={Colors.highlightColor}
+                labelStyle={styles.buttonContent}
+                onPress={this.goToLogin.bind(this)}>
+                Already have an account?
+                </Button>
+            </View>
+        </View>
     )
   }
   goToLogin(){
     this.props.navigator.push({
-      component: Login
+      component: LoginScreen
     });
   }
 }
 
-AppRegistry.registerComponent('Signup', () => Signup);
+AppRegistry.registerComponent('Signup', () => SignupScreen);
 
 SignupScreen.navigationOptions = (navData) => {
     return {
