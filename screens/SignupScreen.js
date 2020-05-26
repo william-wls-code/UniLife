@@ -1,3 +1,8 @@
+/* # COMP 4521 GROUP 7
+     #  TSUI Ka Wing  20410926    kwtsuiab@connect.ust.hk                   
+     #  SIU Wai Lok   20191881    wlsiuab@connect.ust.hk     
+     #  LI Yuk Ting   20427802    ytliae@connect.ust.hk   */
+     
 'use strict';
 import React, {Component} from 'react';
 import {
