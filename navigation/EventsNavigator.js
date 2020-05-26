@@ -26,6 +26,9 @@ import NewsScreen from '../screens/NewsScreen';
 import TodoScreen from '../screens/TodoScreen';
 import MapScreen from '../screens/MapScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
+import AccountScreen from '../screens/AccountScreen';
 
 import ProfileScreen from '../screens/ProfileScreen';
 import Colors from '../constants/Colors';
@@ -127,6 +130,30 @@ const CalendarNavigator = createStackNavigator(
   {defaultNavigationOptions: defaultStackNavOptions},
 );
 
+const LoginNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Login: LoginScreen,
+  },
+  {defaultNavigationOptions: defaultStackNavOptions},
+);
+
+const SignupNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Signup: SignupScreen,
+  },
+  {defaultNavigationOptions: defaultStackNavOptions},
+);
+
+const AccountNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Account: AccountScreen,
+  },
+  {defaultNavigationOptions: defaultStackNavOptions},
+);
+
 const HomeNavigator = createStackNavigator(
   {
     Home: {
@@ -154,6 +181,7 @@ const HomeNavigator = createStackNavigator(
     FeedbackNav: FeedbackNavigator,
     MapNav: MapNavigator,
     CalNav: CalendarNavigator,
+    LoginNav: LoginNavigator,
   },
   {
     defaultNavigationOptions: {headerShown: false},
@@ -205,8 +233,25 @@ const tabScreenConfig = {
         ),
     },
   },
-  Profile: {
-    screen: ProfileScreen,
+  // Profile: {
+  //   screen: ProfileScreen,
+  //   navigationOptions: {
+  //     tabBarIcon: (tabInfo) => {
+  //       return (
+  //         <MaterialIcons name="person" size={25} color={tabInfo.tintColor} />
+  //       );
+  //     },
+  //     tabBarColor: Colors.secondaryColor,
+  //     tabBarLabel:
+  //       Platform.OS === 'android' ? (
+  //         <Text style={{fontFamily: 'Montserrat-Bold'}}>Profile</Text>
+  //       ) : (
+  //         'Profile'
+  //       ),
+  //   },
+  // },
+  Account: {
+    screen: AccountScreen,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return (
@@ -216,9 +261,9 @@ const tabScreenConfig = {
       tabBarColor: Colors.secondaryColor,
       tabBarLabel:
         Platform.OS === 'android' ? (
-          <Text style={{fontFamily: 'Montserrat-Bold'}}>Profile</Text>
+          <Text style={{fontFamily: 'Montserrat-Bold'}}>Account</Text>
         ) : (
-          'Profile'
+          'Account'
         ),
     },
   },
